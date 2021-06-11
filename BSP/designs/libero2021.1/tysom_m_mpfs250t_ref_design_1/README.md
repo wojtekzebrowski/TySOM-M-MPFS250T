@@ -24,7 +24,7 @@ The following interfaces and modules are supported in this reference design.
 | --------------------- |:-------:|:-----------:|
 | DDR                   | 2021.1  | Patch v1.0  |
 | USB                   | 2021.1  | Patch v1.0  |
-| I2C1 (accel, current) | 2021.1  | Patch v1.0  |
+| I2C1                  | 2021.1  | Patch v1.0  |
 | ETH1                  | 2021.1  | Patch v1.0  |
 | ETH2                  | 2021.1  | Patch v1.0  |
 | ETH MDIO              | 2021.1  | Patch v1.0  |
