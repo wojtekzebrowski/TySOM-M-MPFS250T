@@ -1,41 +1,24 @@
-#!/bin/sh
-  
-echo 0 > /sys/class/gpio/export
-echo 1 > /sys/class/gpio/export
-echo 2 > /sys/class/gpio/export
-echo 3 > /sys/class/gpio/export
+#!/bin/bash
 
-echo out > /sys/class/gpio/gpio0/direction
-echo out > /sys/class/gpio/gpio1/direction
-echo out > /sys/class/gpio/gpio2/direction
-echo out > /sys/class/gpio/gpio3/direction
+GPIO_NUM=4
+GPIO_ADDRESS=0x40000000
 
-echo 1 > /sys/class/gpio/gpio0/value
-echo 1 > /sys/class/gpio/gpio1/value
-echo 1 > /sys/class/gpio/gpio2/value
-echo 1 > /sys/class/gpio/gpio3/value
+for (( i=0; $i < $GPIO_NUM ; i++ ))
+do
+	devmem2 $(expr $(($GPIO_ADDRESS)) + $((4*$i))) w 0x1 &>/dev/null
+done
 
+echo "Take a look at the HDMI screen. The colours should change." 
+printf "Script in progress"
 
-echo 1 > /sys/class/gpio/gpio0/value
-sleep 2
-echo 1 > /sys/class/gpio/gpio1/value
-sleep 2
-echo 1 > /sys/class/gpio/gpio2/value
-sleep 2
-echo 1 > /sys/class/gpio/gpio3/value
-sleep 2
-echo 0 > /sys/class/gpio/gpio0/value
-sleep 2
-echo 0 > /sys/class/gpio/gpio1/value
-sleep 2
-echo 0 > /sys/class/gpio/gpio2/value
-sleep 2
-echo 0 > /sys/class/gpio/gpio3/value
-sleep 2
-echo 1 > /sys/class/gpio/gpio0/value
-sleep 2
-echo 1 > /sys/class/gpio/gpio1/value
-sleep 2
-echo 1 > /sys/class/gpio/gpio2/value
-sleep 2
-echo 1 > /sys/class/gpio/gpio3/value
+for (( i=0; $i < $((4*$GPIO_NUM)) ; i++ ))
+do
+   devmem2 $(expr $(($GPIO_ADDRESS)) + $((0xA0))) w $i &>/dev/null
+   sleep 2
+   printf "."
+done
+
+echo "."
+echo "The script ended successfully!"
+
+exit 0

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 	
 	I2C_BUS=0x0
 	DEV_ADDR=0x39
@@ -18,14 +18,10 @@
 	i2cset -f -y $I2C_BUS $DEV_ADDR 0xE0 0xD0 b # ADI Recommended Write - IMP
 	i2cset -f -y $I2C_BUS $DEV_ADDR 0xF9 0x00 b # ADI Recommended Write - IMP
 	i2cset -f -y $I2C_BUS $DEV_ADDR 0xDE 0x10 b # ADI Recommended Write - 0xDE[3] = '0'  Normal TMDS Clock
-
 	i2cset -f -y $I2C_BUS $DEV_ADDR 0x94 0x00 b # Disable All Interrupts
 	i2cset -f -y $I2C_BUS $DEV_ADDR 0xA1 0x40 b # 0xA1[6] - Monitor Sense monitoring disabled Channels 0,1,2 and clock driver power up
-
 	i2cset -f -y $I2C_BUS $DEV_ADDR 0xBA 0x60 b # Programmable delay for input video clock = 011 = no delay
-
 	i2cset -f -y $I2C_BUS $DEV_ADDR 0xD6 0xC0 b #HPD is always high [7:6] soft TMDS clock on disabled [4] video input and clock not gated[0]
-
 
 	# Set up the video input mode
 	i2cset -f -y $I2C_BUS $DEV_ADDR 0x15 0x00 b # Input YCbCr 4:2:2 with embedded syncs
@@ -39,7 +35,7 @@
 	i2cset -f -y $I2C_BUS $DEV_ADDR 0x16 0x30 b                         #    R0x16[ 7] = Output Video Format = 0 (4:4:4)
 	                                        #    R0x16[5:4] = Input Video Color Depth = 11 (8 bits/color)
 	                                        #    R0x16[3:2] = Input video Style = 00 (not valid)
-	                                        #    R0x16[  1] = DDR Input Edge = 0 (falling edge)
+						#    R0x16[  1] = DDR Input Edge = 0 (falling edge)
 	                                        #    ROx16[  0] = Output Color Space = 4 (RGB)
 
 	# Set up the video output mode
@@ -65,4 +61,4 @@
 	                                      #    R0xAF[3:2] = 01 (fixed)
 	                                      #    R0xAF[  1] = HDMI/DVI Mode Select = 1 (HDMI Mode)
 	                                      
-	                                      
+exit 0	                                      
