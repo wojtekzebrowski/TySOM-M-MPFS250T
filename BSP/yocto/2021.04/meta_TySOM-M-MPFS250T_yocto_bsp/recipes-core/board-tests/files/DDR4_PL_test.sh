@@ -1,4 +1,4 @@
-  #!/bin/bash
+#!/bin/bash
 
 
 DDR4_PL=0x60000000

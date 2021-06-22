@@ -1,4 +1,4 @@
-  #!/bin/bash
+#!/bin/bash
 
 
 FMC_OUT=0x40000000

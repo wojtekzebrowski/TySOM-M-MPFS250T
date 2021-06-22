@@ -1,4 +1,4 @@
-  #!/bin/bash
+#!/bin/bash
 
 
 SWITCH_BASE=0x46000000

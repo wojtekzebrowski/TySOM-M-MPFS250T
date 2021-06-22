@@ -1,4 +1,4 @@
-  #!/bin/bash
+#!/bin/bash
 
 
 CLK_MEASURE_BASE=0x72000000
