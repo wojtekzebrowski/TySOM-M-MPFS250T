@@ -13,6 +13,7 @@ SRC_URI = " file://tysom_m_test.sh \
             file://FMC1_test.sh \
             file://FMC2_test.sh \
             file://SWITCH_test.sh \
+            file://QSFP_test.sh \
 			file://CLK_test.sh \
 "
 
@@ -29,6 +30,7 @@ do_install () {
     install -m 0744 ${WORKDIR}/FMC1_test.sh ${D}/root
     install -m 0744 ${WORKDIR}/FMC2_test.sh ${D}/root
     install -m 0744 ${WORKDIR}/SWITCH_test.sh ${D}/root
+    install -m 0744 ${WORKDIR}/QSFP_test.sh ${D}/root
 	install -m 0744 ${WORKDIR}/CLK_test.sh ${D}/root
 }
 FILES_${PN} += "/root"
