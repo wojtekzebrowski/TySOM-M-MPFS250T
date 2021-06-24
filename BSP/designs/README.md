@@ -74,7 +74,7 @@ Supported Fabric Interfaces:
 
 FMC Cards and interfaces
 
-    a. FMC-INDUSTRIAL
+a. FMC-INDUSTRIAL
 
 | Interface/Module Name |
 | --------------------- |
