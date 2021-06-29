@@ -26,7 +26,7 @@ a). "repo" tool installation
 ```
 
 b). Download PolarFire SoC repository
-- change directory to the yocto directory in Aldec TySOM-M-MPFS250T repository
+- change directory to the yocto/2021.04 directory in Aldec TySOM-M-MPFS250T repository
 - initialize repo, synchronize it and rebase
 ```bash
 $ repo init -u https://github.com/polarfire-soc/meta-polarfire-soc-yocto-bsp.git -b refs/tags/v2021.04 -m tools/manifests/riscv-yocto.xml
@@ -37,12 +37,13 @@ $ repo rebase
 ```bash
 $ cd ./openembedded-core/scripts
 $ ./install-buildtools --with-extended-buildtools --url http://downloads.yoctoproject.org/releases/yocto/yocto-3.0.2/
+$ cd ../..
 ```
 
 c). Environment setting
 - [OPTIONAL] If you have downloaded the optional tools for older OS in point b) then source it:
 ```bash
-$ source ../openembedded-core/buildtools/environment-setup-x86_64-pokysdk-linux
+$ source ./openembedded-core/buildtools/environment-setup-x86_64-pokysdk-linux
 ```
 - Source PolarFire Yocto project setup script
 ```bash
