@@ -57,7 +57,7 @@ The following interfaces and modules are supported in this reference design.
 - Wait few seconds for the design generation;
 - In the Design Flow tab double click on the Generate FPGA Array Data and wait until finish;
 - Double click on Configure Design Initialization Data and Memories and select the eNVM tab; 
-- Press Add->Add Boot Mode 1 Client and select the hss.hex file from extras/hss directory;
+- Press Add->Add Boot Mode 1 Client and select eather hss_emmc.hex (for eMMC boot) or hss_sd.hex (for SD card boot) file from extras/hss directory;
 - Generate Bitstream, and Run PROGRAM action in Design Flow tab.
 
 ## Linux support <a name="linux-support"/>

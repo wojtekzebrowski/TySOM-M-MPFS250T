@@ -142,10 +142,8 @@ sd_instantiate_component -sd_name ${sd_name} -component_name {Aldec_MSSv2_sd} -i
 sd_create_pin_slices -sd_name ${sd_name} -pin_name {Aldec_MSSv2_0:MSS_INT_F2M} -pin_slices {[0]}
 sd_create_pin_slices -sd_name ${sd_name} -pin_name {Aldec_MSSv2_0:MSS_INT_F2M} -pin_slices {[63:1]}
 sd_connect_pins_to_constant -sd_name ${sd_name} -pin_names {Aldec_MSSv2_0:MSS_INT_F2M[63:1]} -value {GND}
-sd_mark_pins_unused -sd_name ${sd_name} -pin_names {Aldec_MSSv2_0:FIC_3_APB_M_PSTRB}
 sd_mark_pins_unused -sd_name ${sd_name} -pin_names {Aldec_MSSv2_0:MMUART_0_TXD_OE_M2F}
 sd_mark_pins_unused -sd_name ${sd_name} -pin_names {Aldec_MSSv2_0:MMUART_1_TXD_OE_M2F}
-sd_mark_pins_unused -sd_name ${sd_name} -pin_names {Aldec_MSSv2_0:MSS_INT_M2F}
 sd_mark_pins_unused -sd_name ${sd_name} -pin_names {Aldec_MSSv2_0:PLL_CPU_LOCK_M2F}
 sd_mark_pins_unused -sd_name ${sd_name} -pin_names {Aldec_MSSv2_0:PLL_DDR_LOCK_M2F}
 sd_mark_pins_unused -sd_name ${sd_name} -pin_names {Aldec_MSSv2_0:PLL_SGMII_LOCK_M2F}
@@ -169,6 +167,8 @@ sd_mark_pins_unused -sd_name ${sd_name} -pin_names {Aldec_MSSv2_0:MAC_1_TSU_SYNC
 sd_mark_pins_unused -sd_name ${sd_name} -pin_names {Aldec_MSSv2_0:MAC_1_TSU_DELAY_REQ_RX_M2F}
 sd_mark_pins_unused -sd_name ${sd_name} -pin_names {Aldec_MSSv2_0:MAC_1_TSU_PDELAY_REQ_RX_M2F}
 sd_mark_pins_unused -sd_name ${sd_name} -pin_names {Aldec_MSSv2_0:MAC_1_TSU_PDELAY_RESP_RX_M2F}
+sd_mark_pins_unused -sd_name ${sd_name} -pin_names {Aldec_MSSv2_0:FIC_3_APB_M_PSTRB}
+sd_mark_pins_unused -sd_name ${sd_name} -pin_names {Aldec_MSSv2_0:MSS_INT_M2F}
 sd_mark_pins_unused -sd_name ${sd_name} -pin_names {Aldec_MSSv2_0:FIC_1_AXI4_SLAVE}
 sd_mark_pins_unused -sd_name ${sd_name} -pin_names {Aldec_MSSv2_0:FIC_2_AXI4_SLAVE}
 
@@ -305,37 +305,36 @@ sd_instantiate_component -sd_name ${sd_name} -component_name {TRANSMIT_PLL} -ins
 
 # Add scalar net connections
 sd_connect_pins -sd_name ${sd_name} -pin_names {"ACT_N" "Aldec_MSSv2_0:ACT_N" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_DDR4_C0_0:ACT_N" "ACT_N_0" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"AND4_0:A" "Aldec_MSSv2_0:FIC_0_DLL_LOCK_M2F" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"ACT_N_0" "PF_DDR4_C0_0:ACT_N" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"Aldec_MSSv2_0:FIC_0_DLL_LOCK_M2F" "AND4_0:A" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"AND4_0:B" "Aldec_MSSv2_0:FIC_1_DLL_LOCK_M2F" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"AND4_0:C" "Aldec_MSSv2_0:FIC_2_DLL_LOCK_M2F" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"AND4_0:D" "Aldec_MSSv2_0:FIC_3_DLL_LOCK_M2F" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"BIBUF_I2C0_SCL:E" "Aldec_MSSv2_0:I2C_0_SCL_OE_M2F" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"BIBUF_I2C0_SDA:E" "Aldec_MSSv2_0:I2C_0_SDA_OE_M2F" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"RESET_CLK_62_5MHz_0:EXT_RST_N" "RESET_CLK_125MHz_0:EXT_RST_N" "Aldec_MSSv2_0:MSS_RESET_N_M2F" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"RESET_CLK_62_5MHz_0:PLL_LOCK" "RESET_CLK_125MHz_0:PLL_LOCK" "SYSTEM_PLL_LOCK:Y" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"SYSTEM_PLL_LOCK:B" "AND4_0:Y" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"Aldec_MSSv2_0:I2C_0_SCL_OE_M2F" "BIBUF_I2C0_SCL:E" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"Aldec_MSSv2_0:I2C_0_SDA_OE_M2F" "BIBUF_I2C0_SDA:E" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_DDR4_C0_0:SYS_RESET_N" "Aldec_MSSv2_0:MSS_RESET_N_M2F" "RESET_CLK_62_5MHz_0:EXT_RST_N" "RESET_CLK_125MHz_0:EXT_RST_N" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"AND4_0:Y" "SYSTEM_PLL_LOCK:B" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"BIBUF_I2C0_SCL:Y" "Aldec_MSSv2_0:I2C_0_SCL_F2M" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"BIBUF_I2C0_SDA:Y" "Aldec_MSSv2_0:I2C_0_SDA_F2M" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"CAS_N" "Aldec_MSSv2_0:CAS_N" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_DDR4_C0_0:CAS_N" "CAS_N_0" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"Aldec_MSSv2_0:CAS_N" "CAS_N" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"CAS_N_0" "PF_DDR4_C0_0:CAS_N" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CK0" "Aldec_MSSv2_0:CK0" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_DDR4_C0_0:CK0" "CK0_0" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"CK0_0" "PF_DDR4_C0_0:CK0" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CK0_N" "Aldec_MSSv2_0:CK0_N" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_DDR4_C0_0:CK0_N" "CK0_N_0" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_DDR4_C0_0:CKE" "CKE" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"CK0_N_0" "PF_DDR4_C0_0:CK0_N" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"CKE" "PF_DDR4_C0_0:CKE" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CKE0" "Aldec_MSSv2_0:CKE0" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"RECONFIGURATION_INTERFACE_0:PCLK" "RESET_CLK_62_5MHz_0:CLK" "CLK_125MHz_to_CLK_62_5MHz_0:CLK_OUT" "Aldec_MSSv2_0:FIC_3_PCLK" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"RESET_CLK_62_5MHz_0:CLK" "RECONFIGURATION_INTERFACE_0:PCLK" "CLK_125MHz_to_CLK_62_5MHz_0:CLK_OUT" "Aldec_MSSv2_0:FIC_3_PCLK" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"GLITCHLESS_MUX_0:CLK0" "CLK_160MHz_to_CLK_80MHz_0:CLK_OUT" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CS0_N" "Aldec_MSSv2_0:CS0_N" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_DDR4_C0_0:CS_N" "CS_N" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_PCIE_C0_0:PCIE_1_TL_CLK_125MHz" "GLITCHLESS_MUX_0:CLK_OUT" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"CS_N" "PF_DDR4_C0_0:CS_N" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"GLITCHLESS_MUX_0:CLK_OUT" "PF_PCIE_C0_0:PCIE_1_TL_CLK_125MHz" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"GPIO_1_20_IN" "Aldec_MSSv2_0:GPIO_1_20_IN" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"GPIO_1_23_OUT" "Aldec_MSSv2_0:GPIO_1_23_OUT" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"BIBUF_I2C0_SCL:PAD" "I2C0_SCL" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"BIBUF_I2C0_SDA:PAD" "I2C0_SDA" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"I2C0_SCL" "BIBUF_I2C0_SCL:PAD" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"I2C0_SDA" "BIBUF_I2C0_SDA:PAD" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"I2C_1_SCL" "Aldec_MSSv2_0:I2C_1_SCL" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"I2C_1_SDA" "Aldec_MSSv2_0:I2C_1_SDA" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"Aldec_MSSv2_0:I2C_1_SDA" "I2C_1_SDA" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"MAC_1_MDC" "Aldec_MSSv2_0:MAC_1_MDC" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"MAC_1_MDIO" "Aldec_MSSv2_0:MAC_1_MDIO" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"MMUART_0_RXD_F2M" "Aldec_MSSv2_0:MMUART_0_RXD_F2M" }
@@ -343,127 +342,128 @@ sd_connect_pins -sd_name ${sd_name} -pin_names {"MMUART_0_TXD_M2F" "Aldec_MSSv2_
 sd_connect_pins -sd_name ${sd_name} -pin_names {"MMUART_1_RXD_F2M" "Aldec_MSSv2_0:MMUART_1_RXD_F2M" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"MMUART_1_TXD_M2F" "Aldec_MSSv2_0:MMUART_1_TXD_M2F" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"MMUART_2_RXD_F2M" "Aldec_MSSv2_0:MMUART_2_RXD_F2M" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"MMUART_2_TXD_M2F" "Aldec_MSSv2_0:MMUART_2_TXD_M2F" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"MMUART_3_RXD_F2M" "Aldec_MSSv2_0:MMUART_3_RXD_F2M" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"MMUART_3_TXD_M2F" "Aldec_MSSv2_0:MMUART_3_TXD_M2F" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_DDR4_C0_0:ODT" "ODT" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"Aldec_MSSv2_0:MMUART_2_TXD_M2F" "MMUART_2_TXD_M2F" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"Aldec_MSSv2_0:MMUART_3_RXD_F2M" "MMUART_3_RXD_F2M" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"Aldec_MSSv2_0:MMUART_3_TXD_M2F" "MMUART_3_TXD_M2F" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"ODT" "PF_DDR4_C0_0:ODT" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"ODT0" "Aldec_MSSv2_0:ODT0" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"OSCILLATOR_160MHz_0:RCOSC_160MHZ_CLK_DIV" "CLK_160MHz_to_CLK_80MHz_0:CLK_IN" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_CCC_C1_0:REF_CLK_0" "OSCILLATOR_160MHz_0:RCOSC_160MHZ_GL" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"OSCILLATOR_160MHz_0:RCOSC_160MHZ_GL" "PF_CCC_C1_0:REF_CLK_0" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_PCIE_C0_0:PCIE_1_PERST_N" "PCIE_1_PERST_N" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"GLITCHLESS_MUX_0:SEL" "PCIe_LOCK:Y" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"PCIE_REF_CLK_0:REF_CLK" "TRANSMIT_PLL_0:REF_CLK" "PF_PCIE_C0_0:PCIESS_LANE1_CDR_REF_CLK_0" "PF_PCIE_C0_0:PCIESS_LANE2_CDR_REF_CLK_0" "PF_PCIE_C0_0:PCIESS_LANE3_CDR_REF_CLK_0" "PF_PCIE_C0_0:PCIESS_LANE0_CDR_REF_CLK_0" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_PCIE_C0_0:PCIESS_LANE_RXD0_N" "PCIESS_LANE_RXD0_N" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_PCIE_C0_0:PCIESS_LANE_RXD0_P" "PCIESS_LANE_RXD0_P" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_PCIE_C0_0:PCIESS_LANE2_CDR_REF_CLK_0" "PF_PCIE_C0_0:PCIESS_LANE3_CDR_REF_CLK_0" "PF_PCIE_C0_0:PCIESS_LANE0_CDR_REF_CLK_0" "PF_PCIE_C0_0:PCIESS_LANE1_CDR_REF_CLK_0" "PCIE_REF_CLK_0:REF_CLK" "TRANSMIT_PLL_0:REF_CLK" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"PCIESS_LANE_RXD0_N" "PF_PCIE_C0_0:PCIESS_LANE_RXD0_N" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"PCIESS_LANE_RXD0_P" "PF_PCIE_C0_0:PCIESS_LANE_RXD0_P" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_PCIE_C0_0:PCIESS_LANE_RXD1_N" "PCIESS_LANE_RXD1_N" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_PCIE_C0_0:PCIESS_LANE_RXD1_P" "PCIESS_LANE_RXD1_P" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_PCIE_C0_0:PCIESS_LANE_RXD2_N" "PCIESS_LANE_RXD2_N" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_PCIE_C0_0:PCIESS_LANE_RXD2_P" "PCIESS_LANE_RXD2_P" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_PCIE_C0_0:PCIESS_LANE_RXD3_N" "PCIESS_LANE_RXD3_N" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_PCIE_C0_0:PCIESS_LANE_RXD3_P" "PCIESS_LANE_RXD3_P" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"PCIESS_LANE_RXD3_N" "PF_PCIE_C0_0:PCIESS_LANE_RXD3_N" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"PCIESS_LANE_RXD3_P" "PF_PCIE_C0_0:PCIESS_LANE_RXD3_P" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_PCIE_C0_0:PCIESS_LANE_TXD0_N" "PCIESS_LANE_TXD0_N" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_PCIE_C0_0:PCIESS_LANE_TXD0_P" "PCIESS_LANE_TXD0_P" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"PCIESS_LANE_TXD0_P" "PF_PCIE_C0_0:PCIESS_LANE_TXD0_P" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_PCIE_C0_0:PCIESS_LANE_TXD1_N" "PCIESS_LANE_TXD1_N" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_PCIE_C0_0:PCIESS_LANE_TXD1_P" "PCIESS_LANE_TXD1_P" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_PCIE_C0_0:PCIESS_LANE_TXD2_N" "PCIESS_LANE_TXD2_N" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_PCIE_C0_0:PCIESS_LANE_TXD2_P" "PCIESS_LANE_TXD2_P" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_PCIE_C0_0:PCIESS_LANE_TXD3_N" "PCIESS_LANE_TXD3_N" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_PCIE_C0_0:PCIESS_LANE_TXD3_P" "PCIESS_LANE_TXD3_P" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_CCC_C1_0:OUT0_FABCLK_0" "PF_DDR4_C0_0:PLL_REF_CLK" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_DDR4_C0_0:SYS_CLK" "FIC1_MASTER_0:S_CLK0" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_PCIE_C0_0:PCIE_1_INTERRUPT_OUT" "Aldec_MSSv2_0:MSS_INT_F2M[0]" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"PFSOC_INIT_MONITOR_C0_0:BANK_1_VDDI_STATUS" "RESET_CLK_62_5MHz_0:BANK_x_VDDI_STATUS" "RESET_CLK_62_5MHz_0:BANK_y_VDDI_STATUS" "RESET_CLK_125MHz_0:BANK_x_VDDI_STATUS" "RESET_CLK_125MHz_0:BANK_y_VDDI_STATUS" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"PCIESS_LANE_TXD3_N" "PF_PCIE_C0_0:PCIESS_LANE_TXD3_N" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"PCIESS_LANE_TXD3_P" "PF_PCIE_C0_0:PCIESS_LANE_TXD3_P" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_DDR4_C0_0:PLL_REF_CLK" "PF_CCC_C1_0:OUT0_FABCLK_0" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC1_MASTER_0:S_CLK0" "PF_DDR4_C0_0:SYS_CLK" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"Aldec_MSSv2_0:MSS_INT_F2M[0]" "PF_PCIE_C0_0:PCIE_1_INTERRUPT_OUT" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"RESET_CLK_62_5MHz_0:BANK_y_VDDI_STATUS" "RESET_CLK_62_5MHz_0:BANK_x_VDDI_STATUS" "PFSOC_INIT_MONITOR_C0_0:BANK_1_VDDI_STATUS" "RESET_CLK_125MHz_0:BANK_x_VDDI_STATUS" "RESET_CLK_125MHz_0:BANK_y_VDDI_STATUS" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"PFSOC_INIT_MONITOR_C0_0:DEVICE_INIT_DONE" "RESET_CLK_62_5MHz_0:INIT_DONE" "RESET_CLK_125MHz_0:INIT_DONE" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"PFSOC_INIT_MONITOR_C0_0:FABRIC_POR_N" "RESET_CLK_62_5MHz_0:FPGA_POR_N" "RESET_CLK_125MHz_0:FPGA_POR_N" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"RESET_CLK_62_5MHz_0:FPGA_POR_N" "PFSOC_INIT_MONITOR_C0_0:FABRIC_POR_N" "RESET_CLK_125MHz_0:FPGA_POR_N" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"PFSOC_INIT_MONITOR_C0_0:PCIE_INIT_DONE" "PCIe_LOCK:B" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"RAS_N" "Aldec_MSSv2_0:RAS_N" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_DDR4_C0_0:RAS_N" "RAS_N_0" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"PCIE_REF_CLK_0:REF_CLK_PAD_N" "REF_CLK_PAD_N" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"RAS_N_0" "PF_DDR4_C0_0:RAS_N" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"REF_CLK_PAD_N" "PCIE_REF_CLK_0:REF_CLK_PAD_N" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"PCIE_REF_CLK_0:REF_CLK_PAD_P" "REF_CLK_PAD_P" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"REFCLK" "Aldec_MSSv2_0:REFCLK" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"REFCLK_N" "Aldec_MSSv2_0:REFCLK_N" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"Aldec_MSSv2_0:REFCLK_N" "REFCLK_N" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"RECONFIGURATION_INTERFACE_0:PRESETN" "RESET_CLK_62_5MHz_0:FABRIC_RESET_N" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_CCC_C1_0:PLL_POWERDOWN_N_0" "RESET_CLK_62_5MHz_0:PLL_POWERDOWN_B" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"RESET_N" "Aldec_MSSv2_0:RESET_N" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_DDR4_C0_0:RESET_N" "RESET_N_0" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"Aldec_MSSv2_0:SD_CD" "SD_CD" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"Aldec_MSSv2_0:RESET_N" "RESET_N" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"RESET_N_0" "PF_DDR4_C0_0:RESET_N" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"SD_CD" "Aldec_MSSv2_0:SD_CD" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"Aldec_MSSv2_0:SD_CLK" "SD_CLK" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"Aldec_MSSv2_0:SD_CMD" "SD_CMD" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"SD_CMD" "Aldec_MSSv2_0:SD_CMD" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"Aldec_MSSv2_0:SD_DATA0" "SD_DATA0" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"Aldec_MSSv2_0:SD_DATA1" "SD_DATA1" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"Aldec_MSSv2_0:SD_DATA2" "SD_DATA2" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"Aldec_MSSv2_0:SD_DATA3" "SD_DATA3" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"Aldec_MSSv2_0:SD_POW" "SD_POW" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"SD_POW" "Aldec_MSSv2_0:SD_POW" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"Aldec_MSSv2_0:SD_VOLT_CMD_DIR" "SD_VOLT_CMD_DIR" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"Aldec_MSSv2_0:SD_VOLT_DIR_0" "SD_VOLT_DIR_0" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"SD_VOLT_DIR_0" "Aldec_MSSv2_0:SD_VOLT_DIR_0" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"Aldec_MSSv2_0:SD_VOLT_DIR_1_3" "SD_VOLT_DIR_1_3" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"Aldec_MSSv2_0:SD_VOLT_EN" "SD_VOLT_EN" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"Aldec_MSSv2_0:SD_VOLT_SEL" "SD_VOLT_SEL" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"Aldec_MSSv2_0:SD_WP" "SD_WP" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"SD_VOLT_SEL" "Aldec_MSSv2_0:SD_VOLT_SEL" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"SD_WP" "Aldec_MSSv2_0:SD_WP" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"SGMII_RX0_N" "Aldec_MSSv2_0:SGMII_RX0_N" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"SGMII_RX0_P" "Aldec_MSSv2_0:SGMII_RX0_P" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"Aldec_MSSv2_0:SGMII_RX0_P" "SGMII_RX0_P" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"SGMII_RX1_N" "Aldec_MSSv2_0:SGMII_RX1_N" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"SGMII_RX1_P" "Aldec_MSSv2_0:SGMII_RX1_P" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"Aldec_MSSv2_0:SGMII_RX1_P" "SGMII_RX1_P" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"SGMII_TX0_N" "Aldec_MSSv2_0:SGMII_TX0_N" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"SGMII_TX0_P" "Aldec_MSSv2_0:SGMII_TX0_P" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"SGMII_TX1_N" "Aldec_MSSv2_0:SGMII_TX1_N" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"SGMII_TX1_P" "Aldec_MSSv2_0:SGMII_TX1_P" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_DDR4_C0_0:SHIELD0" "SHIELD0" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_DDR4_C0_0:SHIELD1" "SHIELD1" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_DDR4_C0_0:SHIELD2" "SHIELD2" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_DDR4_C0_0:SHIELD3" "SHIELD3" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"SPI_1_CLK" "Aldec_MSSv2_0:SPI_1_CLK" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"SPI_1_DI" "Aldec_MSSv2_0:SPI_1_DI" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"SPI_1_DO" "Aldec_MSSv2_0:SPI_1_DO" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"SHIELD0" "PF_DDR4_C0_0:SHIELD0" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"SHIELD1" "PF_DDR4_C0_0:SHIELD1" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"SHIELD2" "PF_DDR4_C0_0:SHIELD2" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"SHIELD3" "PF_DDR4_C0_0:SHIELD3" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"Aldec_MSSv2_0:SPI_1_CLK" "SPI_1_CLK" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"Aldec_MSSv2_0:SPI_1_DI" "SPI_1_DI" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"Aldec_MSSv2_0:SPI_1_DO" "SPI_1_DO" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"SPI_1_SS0" "Aldec_MSSv2_0:SPI_1_SS0" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC1_MASTER_0:ACLK" "RESET_CLK_125MHz_0:CLK" "TRANSMIT_PLL_0:CLK_125" "GLITCHLESS_MUX_0:CLK1" "PCIE_MASTER_0:ACLK" "CLK_125MHz_to_CLK_62_5MHz_0:CLK_IN" "FIC0_MASTER_IC_0:ACLK" "PF_PCIE_C0_0:AXI_CLK" "Aldec_MSSv2_0:FIC_0_ACLK" "Aldec_MSSv2_0:FIC_1_ACLK" "Aldec_MSSv2_0:FIC_2_ACLK" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"SYSTEM_PLL_LOCK:A" "TRANSMIT_PLL_0:PLL_LOCK" "PCIe_LOCK:A" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"USB_CLK" "Aldec_MSSv2_0:USB_CLK" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"USB_DATA0" "Aldec_MSSv2_0:USB_DATA0" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"USB_DATA1" "Aldec_MSSv2_0:USB_DATA1" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"USB_DATA2" "Aldec_MSSv2_0:USB_DATA2" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"RESET_CLK_62_5MHz_0:PLL_LOCK" "RESET_CLK_125MHz_0:PLL_LOCK" "SYSTEM_PLL_LOCK:Y" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC1_MASTER_0:ACLK" "GLITCHLESS_MUX_0:CLK1" "TRANSMIT_PLL_0:CLK_125" "CLK_125MHz_to_CLK_62_5MHz_0:CLK_IN" "PCIE_MASTER_0:ACLK" "Aldec_MSSv2_0:FIC_1_ACLK" "Aldec_MSSv2_0:FIC_2_ACLK" "FIC0_MASTER_IC_0:ACLK" "PF_PCIE_C0_0:AXI_CLK" "Aldec_MSSv2_0:FIC_0_ACLK" "RESET_CLK_125MHz_0:CLK" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"PCIe_LOCK:A" "TRANSMIT_PLL_0:PLL_LOCK" "SYSTEM_PLL_LOCK:A" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"Aldec_MSSv2_0:USB_CLK" "USB_CLK" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"Aldec_MSSv2_0:USB_DATA0" "USB_DATA0" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"Aldec_MSSv2_0:USB_DATA1" "USB_DATA1" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"Aldec_MSSv2_0:USB_DATA2" "USB_DATA2" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"USB_DATA3" "Aldec_MSSv2_0:USB_DATA3" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"USB_DATA4" "Aldec_MSSv2_0:USB_DATA4" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"USB_DATA5" "Aldec_MSSv2_0:USB_DATA5" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"USB_DATA6" "Aldec_MSSv2_0:USB_DATA6" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"USB_DATA7" "Aldec_MSSv2_0:USB_DATA7" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"Aldec_MSSv2_0:USB_DATA7" "USB_DATA7" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"USB_DIR" "Aldec_MSSv2_0:USB_DIR" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"USB_NXT" "Aldec_MSSv2_0:USB_NXT" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"Aldec_MSSv2_0:USB_NXT" "USB_NXT" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"USB_STP" "Aldec_MSSv2_0:USB_STP" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_DDR4_C0_0:SYS_RESET_N" "FIC1_MASTER_0:ARESETN" "RESET_CLK_125MHz_0:FABRIC_RESET_N" "PCIE_MASTER_0:ARESETN" "FIC0_MASTER_IC_0:ARESETN" "PF_PCIE_C0_0:AXI_CLK_STABLE" "VSC_8662_RESETN" "USB_ULPI_RESET" "Aldec_MSSv2_0:MSS_RESET_N_F2M" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"WE_N" "Aldec_MSSv2_0:WE_N" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_DDR4_C0_0:WE_N" "WE_N_0" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"VSC_8662_RESETN" "USB_ULPI_RESET" "PCIE_MASTER_0:ARESETN" "FIC1_MASTER_0:ARESETN" "Aldec_MSSv2_0:MSS_RESET_N_F2M" "FIC0_MASTER_IC_0:ARESETN" "PF_PCIE_C0_0:AXI_CLK_STABLE" "RESET_CLK_125MHz_0:FABRIC_RESET_N" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"Aldec_MSSv2_0:WE_N" "WE_N" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"WE_N_0" "PF_DDR4_C0_0:WE_N" }
 
 # Add bus net connections
-sd_connect_pins -sd_name ${sd_name} -pin_names {"A" "Aldec_MSSv2_0:A" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_DDR4_C0_0:A" "A_0" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"BA" "Aldec_MSSv2_0:BA" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"Aldec_MSSv2_0:A" "A" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"A_0" "PF_DDR4_C0_0:A" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"Aldec_MSSv2_0:BA" "BA" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_DDR4_C0_0:BA" "BA_0" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"BG" "Aldec_MSSv2_0:BG" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_DDR4_C0_0:BG" "BG_0" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_DDR4_C0_0:DM_N" "DM_N" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"DQ" "Aldec_MSSv2_0:DQ" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_DDR4_C0_0:DQ" "DQ_0" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"DQS" "Aldec_MSSv2_0:DQS" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"Aldec_MSSv2_0:DQ" "DQ" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"DQ_0" "PF_DDR4_C0_0:DQ" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"Aldec_MSSv2_0:DQS" "DQS" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_DDR4_C0_0:DQS" "DQS_0" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"DQS_N" "Aldec_MSSv2_0:DQS_N" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"Aldec_MSSv2_0:DQS_N" "DQS_N" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_DDR4_C0_0:DQS_N" "DQS_N_0" }
 
 # Add bus interface net connections
 sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC0_MASTER_IC_0:AXI4mmaster0" "Aldec_MSSv2_0:FIC_0_AXI4_MASTER" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC1_MASTER_0:AXI4mmaster0" "Aldec_MSSv2_0:FIC_1_AXI4_MASTER" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC3_MASTER_0:APB3mmaster" "Aldec_MSSv2_0:FIC_3_APB_MASTER" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC0_MASTER_IC_0:AXI4mslave0" "PF_PCIE_C0_0:AXI_1_SLAVE" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC1_MASTER_0:AXI4mslave0" "PF_DDR4_C0_0:AXI4slave0" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"RECONFIGURATION_INTERFACE_0:APBS_SLAVE" "FIC3_MASTER_0:APBmslave16" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"PCIE_MASTER_0:AXI4mslave0" "Aldec_MSSv2_0:FIC_0_AXI4_SLAVE" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_PCIE_C0_0:AXI_1_SLAVE" "FIC0_MASTER_IC_0:AXI4mslave0" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_DDR4_C0_0:AXI4slave0" "FIC1_MASTER_0:AXI4mslave0" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC3_MASTER_0:APBmslave16" "RECONFIGURATION_INTERFACE_0:APBS_SLAVE" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"Aldec_MSSv2_0:FIC_0_AXI4_SLAVE" "PCIE_MASTER_0:AXI4mslave0" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"PCIE_MASTER_0:AXI4mmaster0" "PF_PCIE_C0_0:AXI_1_MASTER" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_CCC_C1_0:PLL0_DRI" "RECONFIGURATION_INTERFACE_0:PLL0_SW_DRI" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_PCIE_C0_0:PCIESS_LANE0_DRI_SLAVE" "RECONFIGURATION_INTERFACE_0:Q0_LANE0_DRI" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"RECONFIGURATION_INTERFACE_0:Q0_LANE0_DRI" "PF_PCIE_C0_0:PCIESS_LANE0_DRI_SLAVE" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_PCIE_C0_0:PCIESS_LANE1_DRI_SLAVE" "RECONFIGURATION_INTERFACE_0:Q0_LANE1_DRI" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_PCIE_C0_0:PCIESS_LANE2_DRI_SLAVE" "RECONFIGURATION_INTERFACE_0:Q0_LANE2_DRI" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_PCIE_C0_0:PCIESS_LANE3_DRI_SLAVE" "RECONFIGURATION_INTERFACE_0:Q0_LANE3_DRI" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_PCIE_C0_0:CLKS_FROM_TXPLL_TO_PCIE_1" "TRANSMIT_PLL_0:CLKS_TO_XCVR" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"RECONFIGURATION_INTERFACE_0:Q0_LANE3_DRI" "PF_PCIE_C0_0:PCIESS_LANE3_DRI_SLAVE" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"TRANSMIT_PLL_0:CLKS_TO_XCVR" "PF_PCIE_C0_0:CLKS_FROM_TXPLL_TO_PCIE_1" }
 
 # Re-enable auto promotion of pins of type 'pad'
 auto_promote_pad_pins -promote_all 1
