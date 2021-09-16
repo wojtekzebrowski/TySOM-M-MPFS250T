@@ -17,7 +17,7 @@ This repository provides all necessary files for building and running Linux OS o
 - [Known problems and issues](#known-problems)
 
 ## Introduction <a name="introduction"/>
-[TySOM-M-MPFS250T](https://www.aldec.com/en/products/emulation/tysom_boards/polarfire_microchip/tysom_m) is Aldec board based on PolarFire SoC MPFS250T-ES, the first SoC FPGA with 64-bit RISC-V multi-core microprocessor subsystem. There are a few steps that needs to be done to boot Linux on the board:
+[TySOM-M-MPFS250T](https://www.aldec.com/en/products/emulation/tysom_boards/polarfire_microchip/tysom_m_mpfs250) is Aldec board based on PolarFire SoC MPFS250T-ES, the first SoC FPGA with 64-bit RISC-V multi-core microprocessor subsystem. There are a few steps that needs to be done to boot Linux on the board:
 1. Bitfile generation using Libero SoC with FPGA and microprocessor subsystem configuration.
 This repository contains two microprocessor subsystem configurations in mss directory. One is for the design which uses eMMC memory, second is for the design which uses SD Card. In the designs/libero2021.1/reference_design directory there are files to generate two versions of reference design for TySOM-M-MPFS250T using Libero ( with eMMC and with SD Card ).
 2. Building Hart Software Services baremetal application for TySOM-M-MPFS250T.
