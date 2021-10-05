@@ -9,6 +9,7 @@ This directory contains the Libero design for TySOM-M-MPFS250T board.
 ## Table of Content
 - [List of reference designs](#ref-desing-list)
   - [tysom_m_mpfs250t_ref_design_1](#ref-desing-1)
+  - [tysom_m_mpfs250t_ref_design_2](#ref-desing-2)
   - [tysom_m_mpfs250t_ref_design_3](#ref-desing-3)
   - [tysom_m_mpfs250t_ref_design_4](#ref-desing-4)
   - [tysom_m_mpfs250t_ref_design_5](#ref-desing-5)
@@ -44,6 +45,15 @@ Supported Fabric Interfaces:
 | --------------------- |:-------:|:-----------:|
 | CAN                   | 2021.1  | Patch v1.0  |
 | I2C0                  | 2021.1  | Patch v1.0  |
+
+### [tysom_m_mpfs250t_ref_design_2](https://github.com/aldec/TySOM-M-MPFS250T/tree/master/BSP/designs/libero2021.1/tysom_m_mpfs250t_ref_design_2) <a name="ref-desing-2"/>
+
+Supported Fabric Interfaces:
+
+| Interface/Module Name | Version | HSS version |
+| --------------------- |:-------:|:-----------:|
+| DDR                   | 2021.1  | Patch v1.0  |
+| QSFP                  | 2021.1  | Patch v1.0  |
 
 ### [tysom_m_mpfs250t_ref_design_3](https://github.com/aldec/TySOM-M-MPFS250T/tree/master/BSP/designs/libero2021.1/tysom_m_mpfs250t_ref_design_3) <a name="ref-desing-3"/>
 
