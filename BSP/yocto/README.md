@@ -26,10 +26,10 @@ a). "repo" tool installation
 ```
 
 b). Download PolarFire SoC repository
-- change directory to the yocto/2021.04 directory in Aldec TySOM-M-MPFS250T repository
+- change directory to the yocto/2021.0x directory in Aldec TySOM-M-MPFS250T repository
 - initialize repo, synchronize it and rebase
 ```bash
-$ repo init -u https://github.com/polarfire-soc/meta-polarfire-soc-yocto-bsp.git -b refs/tags/v2021.04 -m tools/manifests/riscv-yocto.xml
+$ repo init -u https://github.com/polarfire-soc/meta-polarfire-soc-yocto-bsp.git -b refs/tags/v2021.0x -m tools/manifests/riscv-yocto.xml
 $ repo sync
 $ repo rebase
 ```

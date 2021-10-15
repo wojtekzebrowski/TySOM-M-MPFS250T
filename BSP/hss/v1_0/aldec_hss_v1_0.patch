@@ -1822,7 +1822,7 @@ index 0000000..44ab077
 + * */
 +#define LIBERO_SETTING_TIP_CFG_PARAMS    0x07CFE00FUL
 +#define USE_SW_BCLK_SCK_TRAINING                    0x00000001UL
-+#define SW_TRAING_BCLK_SCLK_OFFSET                  0x00000006L
++#define SW_TRAING_BCLK_SCLK_OFFSET                  0x00000004L
 +//#define DEBUG_DDR_INIT
 +//#define DEBUG_DDR_RD_RW_FAIL
 +//#define DEBUG_DDR_RD_RW_PASS

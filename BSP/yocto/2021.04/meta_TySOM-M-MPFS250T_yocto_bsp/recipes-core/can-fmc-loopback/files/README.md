@@ -2,7 +2,7 @@
 
 can_fmc_loopback is a simple example of using CAN via UIO from Linux user-space.
 
-The example expects to find a CAN device mapped to /dev/uio0 and /dev/uio1. One is can on TySOM-M-MPFS250T board, and the second is on FMC-INDUSTRIAL.
+The example expects to find a CAN device mapped to /dev/uio0 and /dev/uio1. One is can on TySOM-M-MPFS250T board, and the second is on FMC-INDUSTRY.
 
 It initialises the CAN devices, places it into normal mode, sends message via uio0 and reads it via uio1.  
 
